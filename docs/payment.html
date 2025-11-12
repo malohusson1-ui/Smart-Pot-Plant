@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paiement — Pot Connecté IoT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <h1 class="brand">Pot Connecté IoT</h1>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="product.html">Produit</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Options de paiement</h2>
+    <p>Vous pouvez utiliser PayPal ou Stripe. Ci-dessous des exemples et instructions pour configurer un paiement réel.</p>
+
+    <section>
+      <h3>Paiement rapide (PayPal placeholder)</h3>
+      <p>Cliquez pour ouvrir PayPal. Remplacez le lien par votre lien PayPal.me ou bouton marchand.</p>
+      <a class="btn" href="https://www.paypal.com/paypalme/yourname/99" target="_blank" rel="noopener">Payer 99 € avec PayPal</a>
+    </section>
+
+    <section>
+      <h3>Stripe Checkout (recommandé)</h3>
+      <p>Stripe Checkout nécessite un petit backend pour créer une session. Exemple d'implémentation :</p>
+      <pre class="code">POST /create-checkout-session
+{
+  price: 9900, // en centimes
+  currency: 'eur',
+  success_url: 'https://your-site/success',
+  cancel_url: 'https://your-site/cancel'
+}
+</pre>
+      <p>Vous pouvez héberger la fonction backend sur Netlify Functions, Vercel Serverless ou tout petit serveur Node/Flask.</p>
+      <p>Si vous voulez, je peux ajouter un exemple de fonction serverless pour Netlify / Vercel.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>&copy; 2025 Pot Connecté IoT</p>
+    </div>
+  </footer>
+</body>
+</html>

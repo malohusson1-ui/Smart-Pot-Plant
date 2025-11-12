@@ -3,39 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pot Connecté IoT</title>
+    <title>Pot Connecté IoT — Smart Pot</title>
+    <meta name="description" content="Pot connecté qui surveille humidité, température et luminosité. Recevez des alertes et gardez vos plantes en bonne santé.">
+    <meta property="og:title" content="Pot Connecté IoT — Smart Pot">
+    <meta property="og:description" content="Pot connecté qui surveille humidité, température et luminosité.">
+    <meta property="og:image" content="assets/plant1.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Pot Connecté IoT</h1>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="product.html">Produit</a>
-            <a href="cart.html">Panier</a>
-            <a href="checkout.html">Commande</a>
-        </nav>
+        <div class="container header-inner">
+            <h1 class="brand">Pot Connecté IoT</h1>
+            <nav>
+                <a href="index.html" class="active">Accueil</a>
+                <a href="product.html">Produit</a>
+                <a href="about.html">À propos</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section class="hero">
-            <h2>Votre plante, toujours au top !</h2>
-            <p>Surveillez l'humidité, la température et la luminosité de vos plantes en temps réel.</p>
-            <a href="product.html" class="btn">Découvrir le produit</a>
+        <section class="hero container">
+            <div class="hero-left">
+                <h2>Votre plante, toujours au top</h2>
+                <p>Surveillez l'humidité, la température et la luminosité de vos plantes en temps réel. Application simple, alertes intelligentes et design moderne.</p>
+                <p class="price">À partir de <strong>99 €</strong></p>
+                <div class="hero-ctas">
+                    <a href="product.html" class="btn">Découvrir le produit</a>
+                    <a href="payment.html" class="btn outline">Acheter maintenant</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <img src="assets/hero.svg" alt="Pot connecté" class="hero-img">
+            </div>
         </section>
 
-        <section class="features">
+        <section class="features container">
             <h3>Fonctionnalités</h3>
-            <ul>
-                <li>Capteurs de température et humidité intégrés</li>
-                <li>Alertes automatiques si conditions non respectées</li>
-                <li>Design élégant pour intérieur</li>
-            </ul>
+            <div class="grid features-grid">
+                <div class="feature">
+                    <img src="assets/plant1.svg" alt="Humidité"/>
+                    <h4>Humidité</h4>
+                    <p>Mesure précise pour éviter le sur-arrosage.</p>
+                </div>
+                <div class="feature">
+                    <img src="assets/plant2.svg" alt="Température"/>
+                    <h4>Température</h4>
+                    <p>Capteur intégré pour conditions optimales.</p>
+                </div>
+                <div class="feature">
+                    <img src="assets/plant3.svg" alt="Luminosité"/>
+                    <h4>Lumineux</h4>
+                    <p>Analyse de la luminosité et conseils d'exposition.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials container">
+            <h3>Avis</h3>
+            <div class="grid">
+                <blockquote>"Mes plantes n'ont jamais été aussi vertes !" — Marie</blockquote>
+                <blockquote>"Installation simple, alertes utiles." — Paul</blockquote>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Pot Connecté IoT. Tous droits réservés.</p>
+        <div class="container footer-inner">
+            <p>&copy; 2025 Pot Connecté IoT. Tous droits réservés.</p>
+            <p><a href="privacy.html">Politique de confidentialité</a> • <a href="faq.html">FAQ</a></p>
+        </div>
     </footer>
 </body>
 </html>

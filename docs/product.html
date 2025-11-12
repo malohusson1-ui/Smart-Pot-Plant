@@ -18,12 +18,33 @@
   </header>
 
   <main>
-    <section class="product-detail">
-      <h2>Pot Connecté IoT</h2>
-      <img src="pot.svg" alt="Pot connecté" class="product-img">
-      <p>Prix : <strong>99 €</strong></p>
-      <p>Surveillez l’humidité, la température et la luminosité de vos plantes. Recevez des alertes en cas de besoin d’eau ou lumière.</p>
-      <button onclick="addToCart('Pot Connecté IoT', 99)">Ajouter au panier</button>
+    <section class="product-detail container">
+      <div class="grid product-grid">
+        <div>
+          <h2>Pot Connecté IoT</h2>
+          <p class="price">Prix : <strong>99 €</strong></p>
+          <p>Surveillez l’humidité, la température et la luminosité de vos plantes. Recevez des alertes et conseils d'entretien via l'application mobile.</p>
+          <div class="product-ctas">
+            <button onclick="addToCart('Pot Connecté IoT', 99)" class="btn">Ajouter au panier</button>
+            <a href="payment.html" class="btn outline">Acheter maintenant</a>
+          </div>
+          <h3>Caractéristiques</h3>
+          <ul>
+            <li>Capteur humidité</li>
+            <li>Capteur température</li>
+            <li>Capteur luminosité</li>
+            <li>Batterie longue durée</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="gallery">
+            <img src="assets/plant1.svg" alt="Pot vue 1">
+            <img src="assets/plant2.svg" alt="Pot vue 2">
+            <img src="assets/plant3.svg" alt="Pot vue 3">
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
