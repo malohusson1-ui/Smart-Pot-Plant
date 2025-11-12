@@ -8,20 +8,27 @@
 </head>
 <body>
     <header>
-        <h1>Pot Connecté IoT</h1>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="product.html">Produit</a>
-            <a href="cart.html">Panier</a>
-            <a href="checkout.html">Commande</a>
-        </nav>
+        <div class="container header-inner">
+            <h1 class="brand">Smart Pot</h1>
+            <nav>
+                <a href="index.html" class="active">Accueil</a>
+                <a href="product.html">Produit</a>
+                <a href="cart.html">Panier</a>
+                <a href="checkout.html">Commande</a>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section class="hero">
-            <h2>Votre plante, toujours au top !</h2>
-            <p>Surveillez l'humidité, la température et la luminosité de vos plantes en temps réel.</p>
-            <a href="product.html" class="btn">Découvrir le produit</a>
+        <section class="hero container">
+            <div class="hero-left">
+                <h2>Gardez vos plantes en pleine santé</h2>
+                <p>Smart Pot mesure l'humidité, la température et la luminosité et vous avertit si une intervention est nécessaire.</p>
+                <a href="product.html" class="btn">Découvrir</a>
+            </div>
+            <div class="hero-right">
+                <img src="assets/hero.svg" alt="Pot connecté" class="hero-img">
+            </div>
         </section>
 
         <section class="features">
