@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pot Connecté IoT</title>
+    <title>Pot Connecté IoT — Smart Pot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,18 +31,55 @@
             </div>
         </section>
 
-        <section class="features">
+        <section class="features container">
             <h3>Fonctionnalités</h3>
-            <ul>
-                <li>Capteurs de température et humidité intégrés</li>
-                <li>Alertes automatiques si conditions non respectées</li>
-                <li>Design élégant pour intérieur</li>
-            </ul>
+            <div class="grid features-grid">
+                <div class="feature" onclick="openModal('humidity')">
+                    <img src="assets/plant1.svg" alt="Humidité"/>
+                    <h4>Humidité</h4>
+                    <p>Mesure précise pour éviter le sur-arrosage.</p>
+                </div>
+                <div class="feature">
+                    <img src="assets/plant2.svg" alt="Température"/>
+                    <h4>Température</h4>
+                    <p>Capteur intégré pour conditions optimales.</p>
+                </div>
+                <div class="feature">
+                    <img src="assets/plant3.svg" alt="Luminosité"/>
+                    <h4>Lumineux</h4>
+                    <p>Analyse de la luminosité et conseils d'exposition.</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Pot Connecté IoT. Tous droits réservés.</p>
+        <p>&copy; 2025 Smart Pot. Tous droits réservés.</p>
     </footer>
+
+    <!-- Modal pour le capteur DHT11 -->
+    <div id="sensorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Capteur d'Humidité - DHT11</h2>
+            <div class="sensor-details">
+                <p><strong>Type :</strong> Capteur de température et humidité numérique</p>
+                <p><strong>Plage d'humidité :</strong> 20% à 80% RH ±5%</p>
+                <p><strong>Plage de température :</strong> 0°C à 50°C ±2°C</p>
+                <p><strong>Temps de réponse :</strong> ~6-10 secondes</p>
+                <p><strong>Alimentation :</strong> 3V à 5.5V DC</p>
+                <p><strong>Protocole :</strong> Signal numérique (1-wire)</p>
+                <h3>Avantages :</h3>
+                <ul>
+                    <li>✓ Très fiable et précis</li>
+                    <li>✓ Consommation d'énergie faible</li>
+                    <li>✓ Facile à intégrer</li>
+                    <li>✓ Capteur robuste et durable</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -42,7 +42,7 @@
         <section class="features container">
             <h3>Fonctionnalités</h3>
             <div class="grid features-grid">
-                <div class="feature">
+                <div class="feature" onclick="openModal('humidity')">
                     <img src="assets/plant1.svg" alt="Humidité"/>
                     <h4>Humidité</h4>
                     <p>Mesure précise pour éviter le sur-arrosage.</p>
@@ -75,5 +75,30 @@
             <p><a href="privacy.html">Politique de confidentialité</a> • <a href="faq.html">FAQ</a></p>
         </div>
     </footer>
+
+    <!-- Modal pour le capteur DHT11 -->
+    <div id="sensorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Capteur d'Humidité - DHT11</h2>
+            <div class="sensor-details">
+                <p><strong>Type :</strong> Capteur de température et humidité numérique</p>
+                <p><strong>Plage d'humidité :</strong> 20% à 80% RH ±5%</p>
+                <p><strong>Plage de température :</strong> 0°C à 50°C ±2°C</p>
+                <p><strong>Temps de réponse :</strong> ~6-10 secondes</p>
+                <p><strong>Alimentation :</strong> 3V à 5.5V DC</p>
+                <p><strong>Protocole :</strong> Signal numérique (1-wire)</p>
+                <h3>Avantages :</h3>
+                <ul>
+                    <li>✓ Très fiable et précis</li>
+                    <li>✓ Consommation d'énergie faible</li>
+                    <li>✓ Facile à intégrer</li>
+                    <li>✓ Capteur robuste et durable</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

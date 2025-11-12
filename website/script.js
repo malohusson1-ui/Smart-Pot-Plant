@@ -1,5 +1,23 @@
 let cart = [];
 
+function openModal(sensorType) {
+  const modal = document.getElementById('sensorModal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeModal() {
+  const modal = document.getElementById('sensorModal');
+  if (modal) modal.classList.remove('active');
+}
+
+// Fermer le modal en cliquant sur l'arrière-plan
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('sensorModal');
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
 function addToCart(name, price) {
   cart.push({name, price});
   localStorage.setItem('cart', JSON.stringify(cart));
