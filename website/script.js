@@ -1,165 +1,146 @@
-let cart = [];
+(function(){
+  // State
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function openModal(sensorType) {
-  const modal = document.getElementById('sensorModal');
-  if (!modal) return;
+  // Sensor descriptions centralized to avoid duplication
+  const SENSORS = {
+    humidity: {
+      title: 'Module ESP32 (mesure d\'humidité)',
+      html: `
+        <h3>📋 Présentation</h3>
+        <p><strong>Module :</strong> ESP32 (microcontrôleur Wi‑Fi / Bluetooth)</p>
+        <p><strong>Rôle ici :</strong> Lecture et transmission des données d'humidité via un capteur connecté (ex : DHT11, AM2302, capteur capacitif).</p>
+        <h3>⚙️ Caractéristiques clés</h3>
+        <ul>
+          <li>Processeur dual-core Tensilica LX6 (jusqu'à 240 MHz)</li>
+          <li>Connectivité Wi‑Fi 802.11 b/g/n et Bluetooth BLE</li>
+          <li>Nombreux GPIO, ADC, I2C, SPI, UART</li>
+          <li>Tension d'alimentation: 3.3 V</li>
+        </ul>
+        <h3>🔌 Utilisation pour l'humidité</h3>
+        <p>L'ESP32 lit le signal du capteur d'humidité puis transmet les mesures via Wi‑Fi.</p>
+      `
+    },
+    temperature: {
+      title: 'Capteur de Température - DHT11',
+      html: `
+        <h3>📋 Spécifications Techniques</h3>
+        <p><strong>Plage d'humidité :</strong> 20% à 80% RH (±5% de précision)</p>
+        <p><strong>Plage de température :</strong> 0°C à 50°C (±2°C)</p>
+        <h3>✨ Avantages</h3>
+        <ul><li>Compatible Arduino/ESP32</li><li>Coût faible</li></ul>
+      `
+    },
+    luminosity: {
+      title: 'Capteur de Luminosité - BH1750',
+      html: `
+        <h3>📋 Présentation</h3>
+        <p><strong>Module :</strong> BH1750 (capteur de luminosité numérique I2C)</p>
+        <h3>⚙️ Spécifications</h3>
+        <ul>
+          <li>Plage : 1 à 65535 lux</li>
+          <li>Interface : I2C</li>
+          <li>Résolution : ~1 lux</li>
+        </ul>
+      `
+    }
+  };
 
-  const titleEl = modal.querySelector('h2');
-  const detailsEl = modal.querySelector('.sensor-details');
-
-  if (sensorType === 'humidity') {
-    titleEl.textContent = "Module ESP32 (mesure d'humidité)";
-    detailsEl.innerHTML = `
-      <h3>📋 Présentation</h3>
-      <p><strong>Module :</strong> ESP32 (microcontrôleur Wi‑Fi / Bluetooth)</p>
-      <p><strong>Rôle ici :</strong> Lecture et transmission des données d'humidité via un capteur connecté (ex : DHT11, AM2302, capteur capacitif).</p>
-
-      <h3>⚙️ Caractéristiques clés</h3>
-      <ul>
-        <li>• Processeur dual-core Tensilica LX6 (jusqu'à 240 MHz)</li>
-        <li>• Connectivité Wi‑Fi 802.11 b/g/n et Bluetooth BLE</li>
-        <li>• Nombreux GPIO, ADC, I2C, SPI, UART pour interfacer capteurs</li>
-        <li>• Tension d'alimentation: 3.3 V (module)</li>
-        <li>• Faible consommation en mode veille avec gestion d'énergie</li>
-      </ul>
-
-      <h3>🔌 Utilisation pour l'humidité</h3>
-      <p>L'ESP32 lit le signal du capteur d'humidité (connecté sur une broche numérique ou analogique selon le type) puis transmet les mesures via Wi‑Fi à votre application ou base locale.</p>
-
-      <h3>⚠️ Remarques</h3>
-      <ul>
-        <li>• L'ESP32 n'est pas un capteur d'humidité en lui‑même : il sert de contrôleur/lecteur.</li>
-        <li>• Choisir le capteur associé (DHT11, DHT22, capteurs capacitifs) selon la précision et la plage désirée.</li>
-      </ul>
-    `;
-  } else if (sensorType === 'temperature') {
-    titleEl.textContent = "Capteur de Température - DHT11";
-    detailsEl.innerHTML = `
-      <h3>📋 Spécifications Techniques</h3>
-      <p><strong>Type :</strong> Capteur de température et humidité numérique</p>
-      <p><strong>Plage d'humidité :</strong> 20% à 80% RH (±5% de précision)</p>
-      <p><strong>Plage de température :</strong> 0°C à 50°C (±2°C de précision)</p>
-      <p><strong>Résolution :</strong> 1°C pour la température, 1% pour l'humidité</p>
-      <p><strong>Temps de réponse :</strong> 6-10 secondes</p>
-
-      <h3>✨ Avantages</h3>
-      <ul>
-        <li>✓ Compatible avec Arduino et ESP32</li>
-        <li>✓ Coût faible et intégration simple</li>
-      </ul>
-
-      <h3>⚠️ Limitations</h3>
-      <ul>
-        <li>• Plage d'humidité limitée et précision modérée</li>
-        <li>• Sensible à la condensation et aux environnements extrêmes</li>
-      </ul>
-    `;
-  } else {
-    titleEl.textContent = 'Capteur';
-    detailsEl.innerHTML = '<p>Information capteur non disponible.</p>';
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  // BH1750 luminosity sensor
-  if (sensorType === 'luminosity') {
-    titleEl.textContent = "Capteur de Luminosité - BH1750";
-    detailsEl.innerHTML = `
-      <h3>📋 Présentation</h3>
-      <p><strong>Module :</strong> BH1750 (capteur de luminosité numérique I2C)</p>
-      <p><strong>Rôle :</strong> Mesure l'éclairement en lux pour adapter l'exposition et l'éclairage des plantes.</p>
-
-      <h3>⚙️ Spécifications clés</h3>
-      <ul>
-        <li>• Plage de mesure : 1 à 65535 lux</li>
-        <li>• Résolution : ~1 lux (mode H-Resolution)</li>
-        <li>• Interface : I2C (adresse par défaut 0x23, alternatif 0x5C selon ADDR)</li>
-        <li>• Tension d'alimentation : typ. 3.3V - 5V</li>
-        <li>• Modes de mesure : Continu (H, L), One-time (H, L) ; temps ~120 ms en H-Resolution</li>
-      </ul>
-
-      <h3>✨ Avantages</h3>
-      <ul>
-        <li>✓ Lecture directe en lux (aucune calibration complexe requise)</li>
-        <li>✓ Faible consommation et interface I2C simple</li>
-        <li>✓ Bonne plage dynamique pour applications intérieures/extérieures</li>
-      </ul>
-
-      <h3>⚠️ Remarques</h3>
-      <ul>
-        <li>• Nécessite une connexion I2C stable et pull-ups si nécessaire</li>
-        <li>• Mesures affectées par obstacles/ombres ; placer le capteur correctement</li>
-      </ul>
-    `;
+  function openModal(sensorType) {
+    const modal = document.getElementById('sensorModal');
+    if (!modal) return;
+    const titleEl = modal.querySelector('h2');
+    const detailsEl = modal.querySelector('.sensor-details');
+    const data = SENSORS[sensorType];
+    titleEl.textContent = data ? data.title : 'Capteur';
+    detailsEl.innerHTML = data ? data.html : '<p>Information capteur non disponible.</p>';
+    modal.classList.add('active');
   }
 
-  modal.classList.add('active');
-}
-
-function closeModal() {
-  const modal = document.getElementById('sensorModal');
-  if (modal) modal.classList.remove('active');
-}
-
-// Fermer le modal en cliquant sur l'arrière-plan
-window.addEventListener('click', function(event) {
-  const modal = document.getElementById('sensorModal');
-  if (event.target === modal) {
-    closeModal();
+  function closeModal() {
+    const modal = document.getElementById('sensorModal');
+    if (modal) modal.classList.remove('active');
   }
-});
 
-function addToCart(name, price) {
-  cart.push({name, price});
-  localStorage.setItem('cart', JSON.stringify(cart));
-  displayCart();
-  alert(name + ' ajouté au panier !');
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  localStorage.setItem('cart', JSON.stringify(cart));
-  displayCart();
-}
-
-function displayCart() {
-  cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const cartItems = document.getElementById('cart-items');
-  const totalEl = document.getElementById('total');
-  const emptyMsg = document.getElementById('empty-message');
-  const cartContent = document.getElementById('cart-content');
-  if (!cartItems) return;
-  cartItems.innerHTML = '';
-  let total = 0;
-  if (cart.length === 0) {
-    if (emptyMsg) emptyMsg.style.display = 'block';
-    if (cartContent) cartContent.style.display = 'none';
-  } else {
-    if (emptyMsg) emptyMsg.style.display = 'none';
-    if (cartContent) cartContent.style.display = 'block';
-  }
-  cart.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.className = 'cart-item';
-    li.innerHTML = `
-      <div class="item-details">
-        <span class="item-name">${item.name}</span>
-        <span class="item-price">${item.price} €</span>
-      </div>
-      <button class="btn-remove" onclick="removeFromCart(${index})">Supprimer</button>
-    `;
-    cartItems.appendChild(li);
-    total += item.price;
+  // Close when clicking the overlay
+  window.addEventListener('click', function(e){
+    const modal = document.getElementById('sensorModal');
+    if (modal && e.target === modal) closeModal();
   });
-  if (totalEl) totalEl.textContent = total;
-}
 
-document.addEventListener('DOMContentLoaded', displayCart);
+  // Cart API
+  function addToCart(name, price) {
+    const p = Number(price) || 0;
+    cart.push({name, price: p});
+    saveCart();
+    displayCart();
+  }
 
-const checkoutForm = document.getElementById('checkout-form');
-if(checkoutForm){
-  checkoutForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    alert('Commande confirmée ! Merci.');
-    localStorage.removeItem('cart');
-    window.location.href = 'index.html';
+  function removeFromCart(index) {
+    if (index < 0 || index >= cart.length) return;
+    cart.splice(index, 1);
+    saveCart();
+    displayCart();
+  }
+
+  function displayCart() {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItems = document.getElementById('cart-items');
+    const totalEl = document.getElementById('total');
+    const emptyMsg = document.getElementById('empty-message');
+    const cartContent = document.getElementById('cart-content');
+    if (!cartItems) return;
+    cartItems.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    let total = 0;
+    cart.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.className = 'cart-item';
+      li.innerHTML = `
+        <div class="item-details">
+          <span class="item-name">${item.name}</span>
+          <span class="item-price">${item.price} €</span>
+        </div>
+        <button class="btn-remove" data-index="${index}">Supprimer</button>
+      `;
+      frag.appendChild(li);
+      total += item.price;
+    });
+    cartItems.appendChild(frag);
+    if (emptyMsg) emptyMsg.style.display = cart.length ? 'none' : 'block';
+    if (cartContent) cartContent.style.display = cart.length ? 'block' : 'none';
+    if (totalEl) totalEl.textContent = total;
+  }
+
+  // Delegate remove button clicks
+  document.addEventListener('click', function(e){
+    if (e.target && e.target.matches('.btn-remove')) {
+      const idx = Number(e.target.dataset.index);
+      removeFromCart(idx);
+    }
   });
-}
+
+  // Checkout
+  document.addEventListener('DOMContentLoaded', function(){
+    displayCart();
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm){
+      checkoutForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        // simple confirmation flow
+        localStorage.removeItem('cart');
+        window.location.href = 'index.html';
+      });
+    }
+  });
+
+  // Expose functions used by inline handlers
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.addToCart = addToCart;
+  window.removeFromCart = removeFromCart;
+})();
