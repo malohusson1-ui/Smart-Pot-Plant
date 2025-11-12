@@ -59,6 +59,38 @@ function openModal(sensorType) {
     detailsEl.innerHTML = '<p>Information capteur non disponible.</p>';
   }
 
+  // BH1750 luminosity sensor
+  if (sensorType === 'luminosity') {
+    titleEl.textContent = "Capteur de Luminosité - BH1750";
+    detailsEl.innerHTML = `
+      <h3>📋 Présentation</h3>
+      <p><strong>Module :</strong> BH1750 (capteur de luminosité numérique I2C)</p>
+      <p><strong>Rôle :</strong> Mesure l'éclairement en lux pour adapter l'exposition et l'éclairage des plantes.</p>
+
+      <h3>⚙️ Spécifications clés</h3>
+      <ul>
+        <li>• Plage de mesure : 1 à 65535 lux</li>
+        <li>• Résolution : ~1 lux (mode H-Resolution)</li>
+        <li>• Interface : I2C (adresse par défaut 0x23, alternatif 0x5C selon ADDR)</li>
+        <li>• Tension d'alimentation : typ. 3.3V - 5V</li>
+        <li>• Modes de mesure : Continu (H, L), One-time (H, L) ; temps ~120 ms en H-Resolution</li>
+      </ul>
+
+      <h3>✨ Avantages</h3>
+      <ul>
+        <li>✓ Lecture directe en lux (aucune calibration complexe requise)</li>
+        <li>✓ Faible consommation et interface I2C simple</li>
+        <li>✓ Bonne plage dynamique pour applications intérieures/extérieures</li>
+      </ul>
+
+      <h3>⚠️ Remarques</h3>
+      <ul>
+        <li>• Nécessite une connexion I2C stable et pull-ups si nécessaire</li>
+        <li>• Mesures affectées par obstacles/ombres ; placer le capteur correctement</li>
+      </ul>
+    `;
+  }
+
   modal.classList.add('active');
 }
 
