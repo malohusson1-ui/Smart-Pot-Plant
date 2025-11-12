@@ -82,19 +82,50 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Capteur d'Humidité - DHT11</h2>
             <div class="sensor-details">
+                <h3>📋 Spécifications Techniques</h3>
                 <p><strong>Type :</strong> Capteur de température et humidité numérique</p>
-                <p><strong>Plage d'humidité :</strong> 20% à 80% RH ±5%</p>
-                <p><strong>Plage de température :</strong> 0°C à 50°C ±2°C</p>
-                <p><strong>Temps de réponse :</strong> ~6-10 secondes</p>
+                <p><strong>Plage d'humidité :</strong> 20% à 80% RH (±5% de précision)</p>
+                <p><strong>Plage de température :</strong> 0°C à 50°C (±2°C de précision)</p>
+                <p><strong>Résolution :</strong> 1°C pour la température, 1% pour l'humidité</p>
+                <p><strong>Temps de réponse :</strong> 6-10 secondes</p>
+                <p><strong>Fréquence d'échantillonnage :</strong> 1 Hz (1 mesure par seconde)</p>
                 <p><strong>Alimentation :</strong> 3V à 5.5V DC</p>
-                <p><strong>Protocole :</strong> Signal numérique (1-wire)</p>
-                <h3>Avantages :</h3>
+                <p><strong>Courant :</strong> ~2.5 mA en fonctionnement, ~100 µA en veille</p>
+                <p><strong>Protocole :</strong> Signal numérique 1-wire</p>
+                
+                <h3>📦 Caractéristiques Physiques</h3>
+                <p><strong>Dimensions :</strong> 16 × 12 × 8 mm</p>
+                <p><strong>Poids :</strong> ~2 grammes</p>
+                <p><strong>Boîtier :</strong> Plastique bleu durable (IP67)</p>
+                <p><strong>Broches :</strong> VCC, GND, Data (3 broches)</p>
+                
+                <h3>✨ Avantages</h3>
                 <ul>
-                    <li>✓ Très fiable et précis</li>
-                    <li>✓ Consommation d'énergie faible</li>
-                    <li>✓ Facile à intégrer</li>
-                    <li>✓ Capteur robuste et durable</li>
+                    <li>✓ Capteur fiable et robuste (largement utilisé en industrie)</li>
+                    <li>✓ Consommation d'énergie très faible (idéal pour batterie)</li>
+                    <li>✓ Sortie numérique (pas de conversion analogique nécessaire)</li>
+                    <li>✓ Compatible Arduino, Raspberry Pi et microcontrôleurs</li>
+                    <li>✓ Coût très abordable</li>
+                    <li>✓ Calibrage en usine intégré</li>
                 </ul>
+                
+                <h3>⚙️ Applications</h3>
+                <ul>
+                    <li>• Stations météo personnelles</li>
+                    <li>• Systèmes d'arrosage automatique</li>
+                    <li>• Contrôle d'humidité pour serres</li>
+                    <li>• Monitoring IoT pour plantes</li>
+                    <li>• Capteurs environnementaux</li>
+                </ul>
+                
+                <h3>⚠️ Limitations</h3>
+                <ul>
+                    <li>• Plage d'humidité limitée (20-80%), ne fonctionne pas en dessous/au-dessus</li>
+                    <li>• Temps de réponse de 6-10 secondes (pas de mesure instantanée)</li>
+                    <li>• Sensible à la condensation (éviter l'eau directe)</li>
+                </ul>
+                
+                <p style="font-size:0.9rem; color:#999; margin-top:16px;"><strong>Note :</strong> Le DHT11 est parfait pour les plantes d'intérieur. Il maintient une stabilité exceptionnelle et requiert peu d'énergie, ce qui le rend idéal pour des mesures continues sans épuiser la batterie.</p>
             </div>
         </div>
     </div>
