@@ -18,11 +18,22 @@
   </header>
 
   <main>
-    <section class="cart">
-      <h2>Panier</h2>
-      <ul id="cart-items"></ul>
-      <p>Total : <span id="total">0</span> €</p>
-      <a href="checkout.html" class="btn">Passer à la commande</a>
+    <section class="cart container">
+      <h2>Votre panier</h2>
+      <div id="empty-message" class="empty-message">
+        <p>Votre panier est vide.</p>
+        <a href="product.html" class="btn">Continuer les achats</a>
+      </div>
+      <div id="cart-content">
+        <ul id="cart-items"></ul>
+        <div class="cart-summary">
+          <div class="total-row">
+            <span>Total :</span>
+            <strong><span id="total">0</span> €</strong>
+          </div>
+          <a href="checkout.html" class="btn">Passer à la commande</a>
+        </div>
+      </div>
     </section>
   </main>
 
